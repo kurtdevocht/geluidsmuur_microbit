@@ -120,6 +120,7 @@ input.onButtonPressed(Button.B, function () {
     doeB()
 })
 function Ledlanceerlicht () {
+    strip.clear()
     for (let index = 0; index <= 9; index++) {
         range = strip.range(9 - index, index + 1)
         range.showColor(neopixel.colors(NeoPixelColors.Green))
@@ -130,14 +131,18 @@ function Ledlanceerlicht () {
 }
 function Lanceer () {
     pins.digitalWritePin(DigitalPin.P12, 0)
+    strip.clear()
+    // Turning on the motors causes a voltage drop => Wait a bit to stabilize the voltage before turning on the leds
+    basic.pause(500)
     Ledlanceerlicht()
     basic.pause(100)
     servos.P1.setAngle(160)
     basic.pause(2000)
     servos.P1.setAngle(20)
+    strip.clear()
+    basic.pause(500)
     pins.digitalWritePin(DigitalPin.P12, 1)
     strip.clear()
-    strip.show()
 }
 let range: neopixel.Strip = null
 let spel = 0
