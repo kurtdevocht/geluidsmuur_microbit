@@ -12,6 +12,15 @@ function doeAB () {
         Lanceer()
     }
 }
+function LedlanceerlichtAfterEffect () {
+    for (let index = 0; index <= 9; index++) {
+        range = strip.range(9 - index, index + 1)
+        range.showColor(neopixel.colors(NeoPixelColors.Black))
+        range = strip.range(15, index + 1)
+        range.showColor(neopixel.colors(NeoPixelColors.Black))
+        basic.pause(100 / (index + 1))
+    }
+}
 function BevestigSpel () {
     State += 1 + spel
     basic.clearScreen()
@@ -139,13 +148,13 @@ function Lanceer () {
     servos.P1.setAngle(160)
     basic.pause(2000)
     servos.P1.setAngle(20)
-    strip.clear()
-    basic.pause(500)
+    basic.pause(100)
     pins.digitalWritePin(DigitalPin.P12, 1)
-    strip.clear()
+    basic.pause(200)
+    LedlanceerlichtAfterEffect()
 }
-let range: neopixel.Strip = null
 let spel = 0
+let range: neopixel.Strip = null
 let strip: neopixel.Strip = null
 let kanaal = 0
 let State = 0
